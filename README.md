@@ -2,36 +2,42 @@ RulzUrDB
 ========
 
 The application database, this database will be available internally,
- external functions will be provided by the API.
-
+external functions will be provided by the API.
 
 # Technologies
 
- * Riak: a document distributed database,
- [official website](http://basho.com/riak/).
+* PostgreSQL: an object-relational database management system,
+[official website](http://www.postgresql.org/).
 
-# Management script
-Usage: `./manage.py [task [task options]]` help is available with
-`./manage.py -h`.
+# Running the database
 
-## install
-Requirements: to run the install commands you need to have VirtualBox installed
- for OSX or Ubuntu at least 12.04.
+This application use docker as a development environment, so that nothing will
+be installed on your system except docker itself. It also allow to develop on
+every OS without troubles.
 
-Usage: `./manage.py install [options]`, options can be combined.
+* Install docker on your distro https://docs.docker.com/
+* Check if docker is correctly install by running: `docker run hello-world`
+* Build the development container: `docker build -t rulzurdb .`
+* Run it! `docker run --rm -P --name rulzurdb rulzurdb`
 
-* -d, --docker: install docker with (with boot2docker on OSX)
+# Connect to database
 
-If no option is specified, the install will perform a `-a` by default.
+It is possible to interact directly with the database through a shell,
+by running the following commands.
 
-Help is available with `./manage.py install -h`
+* Launch a postgres container linked to the running rulzurdb container
+`docker run --rm -t -i --link rulzurdb:rulzurdb rulzurdb bash`
+* Inside the container, connect to the postgres server
+`psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT -d rulzurdb -U rulzurdb`
 
-## docker
-Usage `./manage.py docker [options]`, options can be combined.
+# Consult volumes (logs, config)
 
-* -b, --build: build the docker container
-* -c, --clean: clean docker runtime (stop and remove containers)
-* -r, --run  : run the dedicated docker container
-* -s, --ssh  : connect to the docker container through ssh (for debug purpose)
+To consult volumes we only have to connect the rulzurdb volumes to a simple
+container: `docker run --rm --volumes-from rulzurdb -ti busybox sh`
 
-Help is available with `./manage.py docker -h`
+The files will be available in the place where volumes were mounted in
+[Dockerfile](./Dockerfile), e.g:
+
+* `/etc/postgresql`
+* `/var/log/postgresql`
+* `/var/lib/postgresql`
