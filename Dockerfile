@@ -5,12 +5,11 @@
 FROM       debian
 MAINTAINER Maxime Vidori <maxime.vidori@gmail.com>
 
-ENV PGPASSWORD "rulzurdb"
+ENV PGPASSWORD rulzurdb
 
 # make sure the package repository is up to date
 RUN echo "deb http://ftp.fr.debian.org/debian stable main" > /etc/apt/sources.list
-RUN echo "deb http://ftp.debian.org/debian/ wheezy-updates main" >>\
-    /etc/apt/sources.list
+RUN echo "deb http://ftp.debian.org/debian/ wheezy-updates main" >> /etc/apt/sources.list
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -18,8 +17,7 @@ RUN apt-get install -y postgresql
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible.
-RUN echo "host all  all    0.0.0.0/0  md5" >>\
-    /etc/postgresql/9.1/main/pg_hba.conf
+RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.1/main/pg_hba.conf
 
 # Run the rest of the commands as the ``postgres`` user created by the
 # ``postgres-9.1`` package when it was ``apt-get installed``
@@ -32,7 +30,7 @@ COPY create_tables.sql /tmp/
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
 RUN /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER rulzurdb WITH SUPERUSER PASSWORD 'rulzurdb';" &&\
+    psql --command "CREATE USER rulzurdb WITH SUPERUSER PASSWORD '${PGPASSWORD}';" &&\
     createdb -O rulzurdb rulzurdb
 
 # And add ``listen_addresses`` to ``/etc/postgresql/9.1/main/postgresql.conf``
