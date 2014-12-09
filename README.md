@@ -30,6 +30,8 @@ by running the following commands.
 * Inside the container, connect to the postgres server
 `psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT -d rulzurdb -U rulzurdb`
 
+for further information on managing the db look at [BDD.md](./BDD.md)
+
 # Consult volumes (logs, config)
 
 To consult volumes we only have to connect the rulzurdb volumes to a simple
@@ -41,3 +43,4 @@ The files will be available in the place where volumes were mounted in
 * `/etc/postgresql`
 * `/var/log/postgresql`
 * `/var/lib/postgresql`
+
