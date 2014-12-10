@@ -17,6 +17,9 @@ every OS without troubles.
 
 * Install docker on your distro https://docs.docker.com/
 * Check if docker is correctly install by running: `docker run hello-world`
+* Copy the password.example file into password to customize the password used
+by your container: <br/>
+`cp password.example password && echo "mynewpassword" > password`
 * Build the development container: `docker build -t rulzurdb .`
 * Run it! `docker run --rm -P --name rulzurdb rulzurdb`
 
