@@ -31,7 +31,8 @@ by running the following commands.
 * Launch a postgres container linked to the running rulzurdb container
 `docker run --rm -t -i --link rulzurdb:rulzurdb rulzurdb bash`
 * Inside the container, connect to the postgres server
-`psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT -d rulzurdb -U rulzurdb`
+`psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT
+-d rulzurdb -U rulzurdb`
 
 for further information on managing the db look at [BDD.md](./BDD.md)
 
