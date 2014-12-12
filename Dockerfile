@@ -28,6 +28,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y postgresql
 
 ADD utils/create_tables.sql /tmp/
+ADD utils/clone_schema.sql /tmp/
 ADD password ${PGPASSFILE}
 
 RUN chown postgres:postgres ${PGPASSFILE}
@@ -59,7 +60,8 @@ RUN echo "host all  all    0.0.0.0/0  md5" >> \
 
 # Init the RulzUrDB tables
 RUN /etc/init.d/postgresql start &&\
-    psql -d rulzurdb -a -f /tmp/create_tables.sql
+    psql -d rulzurdb -a -f /tmp/create_tables.sql &&\
+    psql -d rulzurdb -a -f /tmp/clone_schema.sql
 
 # Expose the PostgreSQL port
 EXPOSE 5432
