@@ -27,7 +27,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y postgresql
 
-ADD create_tables.sql /tmp/
+ADD utils/create_tables.sql /tmp/
 ADD password ${PGPASSFILE}
 
 RUN chown postgres:postgres ${PGPASSFILE}

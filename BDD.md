@@ -14,11 +14,11 @@ Then, you can manage the database through the command line:
 
  * create all tables <br/>
  `psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT
- -d rulzurdb -U rulzurdb -a -f /mnt/create_tables.sql`
+ -d rulzurdb -U rulzurdb -a -f /mnt/utils/create_tables.sql`
 
  * delete all tables <br/>
  `psql -h $RULZURDB_PORT_5432_TCP_ADDR -p $RULZURDB_PORT_5432_TCP_PORT
- -d rulzurdb -U rulzurdb -a -f /mnt/delete_all.sql`
+ -d rulzurdb -U rulzurdb -a -f /mnt/utils/delete_all.sql`
 
 # Running pgAdmin on top of the docker container
 
