@@ -2,11 +2,11 @@ CREATE SCHEMA IF NOT EXISTS rulzurkitchen;
 
 -- Creation of enum types
 DROP TYPE IF EXISTS rulzurkitchen.measurement;
-DROP TYPE IF EXISTS rulzurkitchen.type;
+DROP TYPE IF EXISTS rulzurkitchen.category;
 DROP TYPE IF EXISTS rulzurkitchen.duration;
 
 CREATE TYPE rulzurkitchen.measurement AS ENUM ('L', 'g', 'oz', 'spoon');
-CREATE TYPE rulzurkitchen.type AS ENUM ('starter', 'main', 'dessert');
+CREATE TYPE rulzurkitchen.category AS ENUM ('starter', 'main', 'dessert');
 CREATE TYPE rulzurkitchen.duration AS ENUM('0/5', '5/10', '10/15', '15/20',
   '20/25', '25/30', '30/45', '45/60', '60/75', '75/90', '90/120', '120/150');
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS rulzurkitchen.recipe (
     duration rulzurkitchen.duration,
     people smallint CONSTRAINT people_borders CHECK
       (people > 0 AND people < 13),
-    type rulzurkitchen.type
+    category rulzurkitchen.category
 );
 
 CREATE TABLE IF NOT EXISTS rulzurkitchen.recipe_ingredients (
