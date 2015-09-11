@@ -1,5 +1,8 @@
 CREATE SCHEMA IF NOT EXISTS rulzurkitchen;
 
+-- Add HStore support
+CREATE EXTENSION hstore;
+
 -- Creation of enum types
 DROP TYPE IF EXISTS rulzurkitchen.measurement;
 DROP TYPE IF EXISTS rulzurkitchen.category;
@@ -47,7 +50,4 @@ CREATE TABLE IF NOT EXISTS rulzurkitchen.recipe_utensils (
     fk_utensil integer REFERENCES rulzurkitchen.utensil (id),
     PRIMARY KEY (fk_recipe, fk_utensil)
 );
-
-
-
 
