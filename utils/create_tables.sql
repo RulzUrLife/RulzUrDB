@@ -10,26 +10,26 @@ DROP TYPE IF EXISTS category;
 DROP TYPE IF EXISTS duration;
 DROP TYPE IF EXISTS direction;
 
+CREATE TYPE direction AS (title varchar(50), text text);
 CREATE TYPE measurement AS ENUM ('L', 'g', 'oz', 'spoon');
 CREATE TYPE category AS ENUM ('starter', 'main', 'dessert');
 CREATE TYPE duration AS ENUM('0/5', '5/10', '10/15', '15/20',
   '20/25', '25/30', '30/45', '45/60', '60/75', '75/90', '90/120', '120/150');
-CREATE TYPE direction AS (title varchar(20), text text);
 
 -- Creation of tables
 CREATE TABLE IF NOT EXISTS ingredient (
     id SERIAL PRIMARY KEY,
-    name varchar(20)
+    name varchar(50)
 );
 
 CREATE TABLE IF NOT EXISTS utensil (
     id serial PRIMARY KEY,
-    name varchar(20)
+    name varchar(50)
 );
 
 CREATE TABLE IF NOT EXISTS recipe (
     id serial PRIMARY KEY,
-    name varchar(20),
+    name varchar(50),
     directions direction[],
     difficulty smallint CONSTRAINT difficulty_borders CHECK
       (difficulty > 0 AND difficulty < 6),

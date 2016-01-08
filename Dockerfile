@@ -24,10 +24,12 @@ ARG PASSWORD
 #       allows the RUN command to span multiple lines.
 RUN pg_ctlcluster 9.4 main start && \
     psql -c "CREATE USER rulzurdb WITH CREATEDB PASSWORD '${PASSWORD}'" && \
-    createdb -O rulzurdb rulzurdb && \
     pg_ctlcluster 9.4 main stop
 
 RUN echo "*:*:rulzurdb:rulzurdb:${PASSWORD}" > ${PGPASSFILE}
+RUN echo "*:*:rulzurdb_test:rulzurdb:${PASSWORD}" >> ${PGPASSFILE}
+RUN echo "*:*:template1:rulzurdb:${PASSWORD}" >> ${PGPASSFILE}
+
 RUN chown postgres:postgres ${PGPASSFILE} && chmod 600 ${PGPASSFILE}
 
 # And add ``listen_addresses`` to ``/etc/postgresql/9.4/main/postgresql.conf``
