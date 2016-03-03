@@ -32,12 +32,12 @@ recipe (name, directions, difficulty, duration, people, category)
 VALUES
 (
     'recipe_1',
-    ARRAY[
-        CAST(('step_1', 'instructions recipe 1 step 1') AS direction),
-        CAST(('step_2', 'instructions recipe 1 step 2') AS direction),
-        CAST(('step_3', 'instructions recipe 1 step 3') AS direction),
-        CAST(('step_4', 'instructions recipe 1 step 4') AS direction)
-    ],
+    '{
+        "(step_1, instructions recipe 1 step 1)",
+        "(step_2, instructions recipe 1 step 2)",
+        "(step_3, instructions recipe 1 step 3)",
+        "(step_4, instructions recipe 1 step 4)"
+    }',
     1,
     '0/5',
     1,
@@ -49,12 +49,12 @@ recipe (name, directions, difficulty, duration, people, category)
 VALUES
 (
     'recipe_2',
-    ARRAY[
-        CAST(('step_1', 'instructions recipe 2 step 1') AS direction),
-        CAST(('step_2', 'instructions recipe 2 step 2') AS direction),
-        CAST(('step_3', 'instructions recipe 2 step 3') AS direction),
-        CAST(('step_4', 'instructions recipe 2 step 4') AS direction)
-    ],
+    '{
+        "(step_1, instructions recipe 2 step 1)",
+        "(step_2, instructions recipe 2 step 2)",
+        "(step_3, instructions recipe 2 step 3)",
+        "(step_4, instructions recipe 2 step 4)"
+    }',
     2,
     '5/10',
     2,
@@ -66,12 +66,12 @@ recipe (name, directions, difficulty, duration, people, category)
 VALUES
 (
     'recipe_3',
-    ARRAY[
-        CAST(('step_1', 'instructions recipe 3 step 1') AS direction),
-        CAST(('step_2', 'instructions recipe 3 step 2') AS direction),
-        CAST(('step_3', 'instructions recipe 3 step 3') AS direction),
-        CAST(('step_4', 'instructions recipe 3 step 4') AS direction)
-    ],
+    '{
+        "(step_1, instructions recipe 3 step 1)",
+        "(step_2, instructions recipe 3 step 2)",
+        "(step_3, instructions recipe 3 step 3)",
+        "(step_4, instructions recipe 3 step 4)"
+    }',
     3,
     '10/15',
     3,

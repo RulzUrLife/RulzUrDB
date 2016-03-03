@@ -1,10 +1,33 @@
-#!/bin/sh
-set -x -e
+#!/bin/bash
+
+read -r -d '' HELP <<'EOF'
+Usage: helper.sh [COMMAND or SQL FILE]
+By default if no COMMAND or SQL FILE is provided, run the plsql command
+against the rulzurdb database
+
+  help                  print this message
+
+  create_db             create rulzurdb and rulzurdb_test and fill up rulzurdb
+                        with some sample
+
+  reinitialize          drop rulzurdb and rulzurdb_test data then fill up
+                        rulzurdb again.
+
+  full_reinitialize     drop rulzurdb and rulzurdb_test databases and run the
+                        create_db command.
+
+  SQL FILE              execute the file against the rulzurdb database
+
+EOF
+
+set -e
 
 CMD="psql -U rulzurdb -h db"
 
-
 case "$1" in
+"help")
+    echo "$HELP"
+    ;;
 "create_db")
     eval "$CMD -d template1 -c 'CREATE DATABASE rulzurdb'"
     eval "$CMD -d template1 -c 'CREATE DATABASE rulzurdb_test'"

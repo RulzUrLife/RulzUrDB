@@ -19,17 +19,17 @@ CREATE TYPE duration AS ENUM('0/5', '5/10', '10/15', '15/20',
 -- Creation of tables
 CREATE TABLE IF NOT EXISTS ingredient (
     id SERIAL PRIMARY KEY,
-    name varchar(50)
+    name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS utensil (
     id serial PRIMARY KEY,
-    name varchar(50)
+    name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS recipe (
     id serial PRIMARY KEY,
-    name varchar(50),
+    name varchar(50) UNIQUE NOT NULL,
     directions direction[],
     difficulty smallint CONSTRAINT difficulty_borders CHECK
       (difficulty > 0 AND difficulty < 6),
